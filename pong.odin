@@ -16,9 +16,8 @@ main::proc() {
 		}
 
 		rl.BeginDrawing()
+		rl.ClearBackground(rl.BLACK) // clear before drawing new positions
 		rl.DrawRectangle(pos, 100, 180, 30, rl.WHITE)
 		rl.EndDrawing()
-
-		rl.ClearBackground(rl.BLACK)
 	}
 }
