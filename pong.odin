@@ -30,6 +30,11 @@ main::proc() {
 		if next_ball_rect.y >= 720 - 30 || next_ball_rect.y <= 0 {
 			ball_direction.y *= -1
 		}
+
+		if rl.CheckCollisionRecs(next_ball_rect, player1) {
+			ball_direction.y *= -1
+		}
+
 		ball.y += ball_speed * ball_direction.y
 
 		rl.BeginDrawing()
