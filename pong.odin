@@ -40,7 +40,15 @@ main::proc() {
 		if next_ball_rect.y >= window_size.y - ball.height || next_ball_rect.y <= 0 {
 			ball_direction.y *= -1
 		}
-		
+
+		// reset game state when ball is out of window bounds
+		if next_ball_rect.x >= window_size.x - ball.width {
+			reset(&gs)
+		}	
+		if next_ball_rect.x < 0 {
+			reset(&gs)
+		}
+
 		// built-in raylib collision detection
 		if rl.CheckCollisionRecs(next_ball_rect, player1) {
 			ball_center := rl.Vector2{
@@ -57,19 +65,10 @@ main::proc() {
 		ball.x += ball_speed * ball_direction.x
 		ball.y += ball_speed * ball_direction.y
 
-		if next_ball_rect.x >= window_size.x - ball.width {
-			reset(&gs)
-		}
-		
-		if next_ball_rect.x < 0 {
-			reset(&gs)
-		}
-
-
 		rl.BeginDrawing()
 
 		rl.ClearBackground(rl.BLACK) // clear before drawing new positions
-		
+
 		rl.DrawRectangleRec(player1, rl.WHITE)
 		rl.DrawRectangleRec(ball, rl.RED)
 		
