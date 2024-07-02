@@ -28,6 +28,7 @@ main::proc() {
 		if rl.IsKeyDown(.DOWN) {
 			player1.y += player1_speed
 		}
+		// limit player y axis movements inside window boundaries
 		player1.y = linalg.clamp(player1.y, 0, window_size.y - player1.height)
 
 		// ball direction calculations
@@ -35,12 +36,9 @@ main::proc() {
 		next_ball_rect.x += ball_speed * ball_direction.x
 		next_ball_rect.y += ball_speed * ball_direction.y
 
-		// flip direction when it reaches screen edges
+		// flip direction when it reaches window edges
 		if next_ball_rect.y >= window_size.y - ball.height || next_ball_rect.y <= 0 {
 			ball_direction.y *= -1
-		}
-		if next_ball_rect.x >= window_size.x - ball.width || next_ball_rect.x <= 0 {
-			ball_direction.x *= -1
 		}
 		
 		// built-in raylib collision detection
